@@ -10,10 +10,10 @@ const {
 } = useCvState()
 const switchLocalePath = useSwitchLocalePath()
 const i18n = useI18n()
-const { downloadPdf } = usePrint()
+const { downloadPdf , downloadWord } = usePrint()
 
 const config = {
-  layouts: ['one-column', 'two-column'],
+  layouts: ['one-column', 'two-column', 'one-column-alt', 'two-column-alt'],
   colors: [
     { name: 'pink', color: '#9D174D', darker: '#831843' },
     { name: 'purple', color: '#5B21B6', darker: '#4C1D95' },
@@ -73,13 +73,27 @@ function getCurrentColor(colorValue: string): {
       <LandingLogo />
 
     </div>
-    <h2 class="flex flex-wrap text-xl/normal pt-10 px-6 tracking-wide uppercase">
-      <span class="title__text">
-        {{ $t("cv-settings") }}
-      </span>
-    </h2>
+
+    <div class="px-6 py-4">
+      <h5 class="m-2"> How it Works</h5>
+      <iframe height="200" width="400" src="https://www.youtube.com/embed/22bdbn276t8?si=emXQEMshn1bbrlEg"
+              title="YouTube video player" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+
     <form class="form mb-10" autocomplete="on">
+
       <div class="form__section px-6 py-3">
+
+
+        <h2 class="flex flex-wrap text-xl/normal pt-10 px-2 tracking-wide uppercase">
+          <span class="title__text">
+            <legend class="form__legend">
+              {{ $t("cv-settings") }}
+            </legend>
+          </span>
+        </h2>
         <button class="form__btn form__btn--ghost" type="button" @click="resetForm">
           {{ $t("reset-settings") }}
         </button>
@@ -110,11 +124,11 @@ function getCurrentColor(colorValue: string): {
         <div class="flex flex-wrap gap-2 justify-start">
           <label v-for="layout in config.layouts" :key="layout" tabindex="0"
             class="form__btn form__btn--ghost capitalize" :class="[
-          {
-            'form__btn--active':
-              layout === formSettings.layout,
-          },
-        ]">
+                {
+                  'form__btn--active':
+                    layout === formSettings.layout,
+                },
+              ]">
             {{ $t(layout) }}
             <input v-model="formSettings.layout" :value="layout" type="radio" class="sr-only">
           </label>
@@ -130,12 +144,12 @@ function getCurrentColor(colorValue: string): {
         <div class="flex flex-wrap gap-2 justify-start">
           <label v-for="color in config.colors" :key="color.color" tabindex="0"
             class="form__btn form__btn--color-theme capitalize" :class="[
-          `form__btn--${color.name}`,
-          {
-            'form__btn--color-selected':
-              color.color === formSettings.activeColor,
-          },
-        ]" @keydown.enter="changeColor(color.color, color.darker)">
+                `form__btn--${color.name}`,
+                {
+                  'form__btn--color-selected':
+                    color.color === formSettings.activeColor,
+                },
+              ]" @keydown.enter="changeColor(color.color, color.darker)">
             {{ $t(color.name) }}
             <input v-model="formSettings.activeColor" type="radio" class="sr-only" :value="color.color"
               @change="changeColor(color.color, color.darker)">
@@ -300,6 +314,9 @@ function getCurrentColor(colorValue: string): {
         <button type="button" class="form__btn flex flex-col justify-center" @click="downloadPdf">
           <span>{{ $t("download-cv-pdf") }}</span>
         </button>
+        <button type="button" class="form__btn flex flex-col justify-center" @click="downloadWord">
+  <span>{{ $t("download-cv-word") }}</span>
+</button>
 
 
       </div>
@@ -336,37 +353,5 @@ function getCurrentColor(colorValue: string): {
   }
 }
 
-.video-container {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 100%;
-  margin: 0 auto 20px auto;
-  flex: 1;
-}
 
-.video-heading {
-  font-size: 1.5em;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.iframe-container {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%;
-  /* 16:9 aspect ratio */
-  height: 0;
-  overflow: hidden;
-}
-
-.iframe-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
 </style>

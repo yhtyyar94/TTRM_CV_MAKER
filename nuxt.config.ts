@@ -77,6 +77,11 @@ export default defineNuxtConfig({
         code: 'tr',
         file: 'tr.json',
         name: 'Turkish'
+      },
+      {
+        code: 'bn',
+        file: 'bn.json',
+        name: 'Bengali'
       }
 
     ],
@@ -88,6 +93,7 @@ export default defineNuxtConfig({
       cookieKey: 'i18n_redirected',
       redirectOn: 'root',
     },
+    
   },
 
   router: {

@@ -1,5 +1,6 @@
 import { useCvState } from '~/data/useCvState'
-
+import { saveAs } from 'file-saver'
+import * as docx from 'docx'
 export default function usePrint() {
   const { formSettings } = useCvState()
   const i18n = useI18n()
@@ -43,7 +44,29 @@ export default function usePrint() {
     document.title = `CV_${formSettings.value.name}_${formSettings.value.lastName}_${i18n.locale.value}`
   }
 
+  function downloadWord(): void {
+    const doc = new docx.Document({
+      sections: [{
+        properties: {},
+        children: [
+          new docx.Paragraph({
+            children: [
+              new docx.TextRun(`${formSettings.value.name} ${formSettings.value.lastName}`),
+            ],
+          }),
+          // Add more paragraphs and sections based on your CV structure
+        ],
+      }],
+    })
+
+    docx.Packer.toBlob(doc).then(blob => {
+      saveAs(blob, `CV_${formSettings.value.name}_${formSettings.value.lastName}_${i18n.locale.value}.docx`)
+    })
+  }
+
+
   return {
     downloadPdf,
+    downloadWord,
   }
 }

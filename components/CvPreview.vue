@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 import { useCvState } from '~/data/useCvState'
+import CvPreviewOneColumnAlt from './CvPreviewOneColumnAlt.vue';
+import CvPreviewTwoColumnAlt from './CvPreviewTwoColumnAlt.vue';
 
 const { formSettings, isLoading } = useCvState()
 </script>
@@ -28,16 +30,22 @@ const { formSettings, isLoading } = useCvState()
         class="cv shadow-lg mt-6 bg-white relative"
         :class="[
           { blur: isLoading },
-          formSettings.layout === 'one-column' && 'p-10 flex flex-col gap-4',
-          formSettings.layout === 'two-column' && 'grid grid-cols-3',
+          (formSettings.layout === 'one-column' || formSettings.layout === 'one-column-alt') && 'p-10 flex flex-col gap-4',
+          (formSettings.layout === 'two-column' || formSettings.layout === 'two-column-alt') && 'grid grid-cols-3',
         ]"
       >
         <template v-if="formSettings.layout === 'one-column'">
           <CvPreviewOneColumn />
         </template>
+        <template v-if="formSettings.layout === 'one-column-alt'">
+          <CvPreviewOneColumnAlt />
+        </template>
 
-        <template v-if="formSettings.layout === 'two-column'">
+        <template v-if="formSettings.layout === 'two-column' ">
           <CvPreviewTwoColumn />
+        </template>
+        <template v-if="formSettings.layout === 'two-column-alt'">
+          <CvPreviewTwoColumnAlt />
         </template>
       </div>
     </div>

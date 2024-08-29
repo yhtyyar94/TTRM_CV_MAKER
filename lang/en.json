@@ -3,6 +3,7 @@
   "en-name": "English",
   "id-name": "Indonesian",
   "de-name": "German",
+  "bn-name": "Bangla",
   "fr-name": "French",
   "nl-name": "Dutch",
   "tr-name": "Turkish",
@@ -77,6 +78,6 @@
   "quicklink": "Quick Links",
   "website": "Our Website",
   "create": "Create CV",
-  "rights": "2024 WE'EHERE. All rights reserved"
-
+  "rights": "2024 WE'EHERE. All rights reserved",
+  "download-cv-word": "Download your CV as Word"
 }

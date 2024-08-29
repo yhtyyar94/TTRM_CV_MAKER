@@ -1,8 +1,15 @@
 <script lang="ts" setup>
 const localePath = useLocalePath()
+const { t, locale } = useI18n()
 definePageMeta({
   titleI18n: 'title-tag',
   layout: 'landing',
+})
+useHead({
+  htmlAttrs: {
+    lang: locale,
+  },
+  title: t('title-tag'),
 })
 </script>
 

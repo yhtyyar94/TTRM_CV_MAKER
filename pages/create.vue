@@ -70,7 +70,7 @@ useHead({
     <CvPreview class="basis-3/4" />
 
   </main>
-  <LandingFooterView />
+
 </template>
 
 <style lang="postcss">

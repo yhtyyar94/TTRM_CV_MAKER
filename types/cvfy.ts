@@ -8,7 +8,7 @@ export const LEVELS = [
 
 export type Level = (typeof LEVELS)[number]
 export interface Cv {
-  layout?: 'one-column' | 'two-column'
+  layout?: 'one-column' | 'two-column' | 'one-column-alt' | 'two-column-alt'
   profileImageDataUri?: string | null
   jobTitle: string
   name: string
