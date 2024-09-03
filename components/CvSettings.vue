@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { SectionNameList } from '~/types/cvfy'
 import { useCvState } from '~/data/useCvState'
+import { useGoogleAI } from "~/composables/useGoogleAI";
 
 const {
   formSettings,
@@ -11,6 +12,23 @@ const {
 const switchLocalePath = useSwitchLocalePath()
 const i18n = useI18n()
 const { downloadPdf , downloadWord } = usePrint()
+const { generateContent } = useGoogleAI();
+const isLoading= ref(false)
+
+
+
+async function translate(text: string, lang: string, formType: string){
+  isLoading.value = true
+  try{
+  formSettings.value.aboutme = await generateContent(
+      `translate the following " ${text}" in this ${lang}. And return only string. if its already in ${lang} language keep it as it `
+    );
+  }catch(e)
+  {
+    console.log(e)
+  }
+  isLoading.value = false
+}
 
 const config = {
   layouts: ['one-column', 'two-column', 'one-column-alt', 'two-column-alt'],
@@ -22,11 +40,14 @@ const config = {
     { name: 'black', color: '#1F2937', darker: '#111827' },
   ],
   languages: [
-    { name: 'en-name', code: 'en' },
-    { name: 'tr-name', code: 'tr' },
-    { name: 'nl-name', code: 'nl' }
+    { name: 'en-name', code: 'en' , isoname: 'English' },
+    { name: 'tr-name', code: 'tr' , isoname: 'Turkish'},
+    { name: 'nl-name', code: 'nl', isoname: 'Dutch' },
+    { name: 'bn-name', code: 'bn', isoname: 'Bangla' }
   ],
 }
+
+const selectedLanguage = ref(config.languages[0].code)
 
 watch(
   () => formSettings.value,
@@ -160,51 +181,63 @@ function getCurrentColor(colorValue: string): {
 
       <!-- PERSONAL DETAILS -->
       <fieldset class="form__section">
-        <expansion-panel :panel-name="$t('personal-details')">
-          <template #title>
-            <legend class="form__legend">
-              {{ $t("personal-details") }}
-            </legend>
-          </template>
-          <template #content>
-            <div class="grid grid-cols-2 gap-x-3 gap-y-10">
-              <div class="form__group col-span-full">
-                <span class="form__label">📷 {{ $t("profile-image") }} </span>
-                <CvProfileImageUploader v-model="formSettings.profileImageDataUri" />
-              </div>
-              <div class="form__group col-span-full">
-                <label class="form__label" for="job-pos">💼 {{ $t("job-title") }}</label>
-                <input id="job-pos" v-model="formSettings.jobTitle" class="form__control" type="text">
-              </div>
-              <div class="form__group">
-                <label class="form__label" for="first-name">👤 {{ $t("first-name") }}</label>
-                <input id="first-name" v-model="formSettings.name" class="form__control" type="text">
-              </div>
-              <div class="form__group">
-                <label class="form__label" for="last-name">👤 {{ $t("last-name") }}</label>
-                <input id="last-name" v-model="formSettings.lastName" class="form__control" type="text">
-              </div>
-              <div class="form__group col-span-full">
-                <label class="form__label" for="email">✉️ {{ $t("email") }}</label>
-                <input id="email" v-model="formSettings.email" class="form__control" type="email">
-              </div>
-              <div class="form__group">
-                <label class="form__label" for="location">📍 {{ $t("location") }}</label>
-                <input id="location" v-model="formSettings.location" class="form__control" type="text">
-              </div>
-              <div class="form__group">
-                <label class="form__label" for="phone">📱 {{ $t("phone-number") }}</label>
-                <input id="phone" v-model="formSettings.phoneNumber" class="form__control" type="tel">
-              </div>
-              <div class="form__group col-span-full">
-                <label class="form__label" for="aboutme">🌟 {{ $t("about-me") }}</label>
-                <textarea id="aboutme" v-model="formSettings.aboutme" class="form__control" name="aboutme" cols="30"
-                  rows="10" />
-              </div>
-            </div>
-          </template>
-        </expansion-panel>
-      </fieldset>
+    <expansion-panel :panel-name="$t('personal-details')">
+      <template #title>
+        <legend class="form__legend">
+          {{ $t("personal-details") }}
+        </legend>
+      </template>
+      <template #content>
+        <div class="grid grid-cols-2 gap-x-3 gap-y-10">
+          <!-- Existing form fields -->
+
+          <!-- About Me Section -->
+          {{  isLoading }}
+          <div v-if="!isLoading" class="form__group col-span-full">
+            <label class="form__label" for="aboutme">🌟 {{ $t("about-me") }}</label>
+            <textarea
+              id="aboutme"
+              v-model="formSettings.aboutme"
+              class="form__control"
+              name="aboutme"
+              cols="30"
+              rows="10"
+            />
+          </div>
+          <div v-else class="loader"></div>
+
+          <!-- Language selection dropdown -->
+          <div class="form__group col-span-full">
+            <label class="form__label" for="language-select">
+              🌐 {{ $t("select-language") }}
+            </label>
+            <select
+              id="language-select"
+              v-model="selectedLanguage"
+              class="form__control"
+            >
+              <option v-for="lang in config.languages" :key="lang.code" :value="lang.code">
+                {{ $t(lang.isoname) }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Translate button -->
+          <div class="form__group col-span-full">
+            <button
+              type="button"
+              class="form__btn form__btn--ghost"
+              @click="translate(formSettings.aboutme,selectedLanguage , aboutme  )"
+            >
+              {{ $t("translate-about-me") }}
+            </button>
+          </div>
+
+         
+        </div>
+      </template>
+    </expansion-panel>
+  </fieldset>
       <!-- PERSONAL DETAILS -->
 
       <!-- SKILLS -->
@@ -353,5 +386,18 @@ function getCurrentColor(colorValue: string): {
   }
 }
 
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 </style>

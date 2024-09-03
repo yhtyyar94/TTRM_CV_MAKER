@@ -121,4 +121,10 @@ export default defineNuxtConfig({
   sitemap: {
     autoI18n: true,
   },
+
+  runtimeConfig: {
+    public: {
+      googleAiApiKey: process.env.GOOGLE_AI_API_KEY,
+    },
+  },
 })
