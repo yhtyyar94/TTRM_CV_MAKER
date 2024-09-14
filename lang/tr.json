@@ -78,6 +78,10 @@
     "website": "Web Sitemiz",
     "create": "CV Oluştur",
     "rights": "2024 WE'EHERE. All rights reserved",
-    "download-cv-word": "CV'nizi Word olarak indirin"
+    "download-cv-word": "CV'nizi Word olarak indirin",
+    "translate-text": "Tercüme Edilen Test",
+"translate-about-me": "Hakkımda Tercüme Et",
+"translate-title": "Başlığı Tercüme Et",
+"translate-summary": "Özeti Tercüme Et"
   }
   

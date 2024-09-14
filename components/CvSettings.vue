@@ -14,6 +14,7 @@ const i18n = useI18n()
 const { downloadPdf , downloadWord } = usePrint()
 const { generateContent } = useGoogleAI();
 const isLoading= ref(false)
+const loading= ref(false)
 
 
 
@@ -86,6 +87,10 @@ function getCurrentColor(colorValue: string): {
     || config.colors[1]
   )
 }
+
+function onVideoLoad(){
+  loading.value = false
+}
 </script>
 
 <template>
@@ -96,11 +101,26 @@ function getCurrentColor(colorValue: string): {
     </div>
 
     <div class="px-6 py-4">
-      <h5 class="m-2"> How it Works</h5>
-      <iframe height="200" width="400" src="https://www.youtube.com/embed/22bdbn276t8?si=emXQEMshn1bbrlEg"
-              title="YouTube video player" frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+     
+    <h5 class="m-2">How it Works</h5>
+    <div class="px-2 py-4">
+    <!-- Loader -->
+    <div v-if="loading" class="loader"></div>
+
+    <!-- Iframe video -->
+    <iframe
+      v-show="!loading"
+      height="200"
+      width="400"
+      src="https://www.youtube.com/embed/22bdbn276t8?si=emXQEMshn1bbrlEg"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+      @load="onVideoLoad"
+    ></iframe>
+  </div>
     </div>
 
     <form class="form mb-10" autocomplete="on">
@@ -227,7 +247,7 @@ function getCurrentColor(colorValue: string): {
             <button
               type="button"
               class="form__btn form__btn--ghost"
-              @click="translate(formSettings.aboutme,selectedLanguage , aboutme  )"
+              @click="translate(formSettings.aboutme,selectedLanguage , 'aboutme'  )"
             >
               {{ $t("translate-about-me") }}
             </button>
@@ -253,10 +273,19 @@ function getCurrentColor(colorValue: string): {
               <div class="video-container">
                 <h2 class="video-heading">Necessary Skills</h2>
                 <div class="iframe-container">
-                  <iframe width="560" height="315" src="https://www.youtube.com/embed/yph1Dp46dV4?si=QykdB87lCI2uHtZv"
-                    title="YouTube video player" frameborder="0"
+                  <iframe
+
+                    height="200"
+                    width="400"
+                    src="https://www.youtube.com/embed/22bdbn276t8?si=emXQEMshn1bbrlEg"
+                    title="YouTube video player"
+                    frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen
+                  
+                  ></iframe>
+
                 </div>
               </div>
               <CvInputTags v-model="formSettings.jobSkills" tag-list-name="jobSkills"

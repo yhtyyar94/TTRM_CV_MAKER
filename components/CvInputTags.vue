@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useCvState } from '~/data/useCvState'
 import type { DefaultSkill, LanguagesSkill, Level, Skill, SkillType } from '~/types/cvfy'
+import { useGoogleAI } from "~/composables/useGoogleAI";
 
 const props = defineProps<{
   tagListName: SkillType
@@ -8,11 +9,30 @@ const props = defineProps<{
   tagListLabel: string
   display: boolean
 }>()
-
+const { generateContent } = useGoogleAI();
+const selectedLanguage = ref('en')
+const isLoading = ref(false)
 const emit = defineEmits<{
   (event: 'update:modelValue', value: Skill[]): void
 }>()
 
+
+async function translate() {
+
+  console.log(state.tagInput, 'dasdasdasfewf')
+  isLoading.value = true
+  try {
+    console.log('dasdasfe', state)
+    const translatedText = await generateContent(
+      `translate the following word "${state.tagInput}" in ${selectedLanguage.value}. And return only string.`
+    )
+   state.tagInput = translatedText
+   
+  } catch (e) {
+    console.error(e)
+  }
+  isLoading.value = false
+}
 const { t } = useI18n()
 
 const state = reactive({
@@ -75,6 +95,23 @@ function handleRemoveSkill(tag: string) {
   }
 }
 
+const config = {
+  layouts: ['one-column', 'two-column', 'one-column-alt', 'two-column-alt'],
+  colors: [
+    { name: 'pink', color: '#9D174D', darker: '#831843' },
+    { name: 'purple', color: '#5B21B6', darker: '#4C1D95' },
+    { name: 'blue', color: '#1E40AF', darker: '#1E3A8A' },
+    { name: 'green', color: '#065F46', darker: '#064E3B' },
+    { name: 'black', color: '#1F2937', darker: '#111827' },
+  ],
+  languages: [
+    { name: 'en-name', code: 'en' , isoname: 'English' },
+    { name: 'tr-name', code: 'tr' , isoname: 'Turkish'},
+    { name: 'nl-name', code: 'nl', isoname: 'Dutch' },
+    { name: 'bn-name', code: 'bn', isoname: 'Bangla' }
+  ],
+}
+
 // Drag and Drop
 const parentEl = ref<HTMLElement>()
 
@@ -130,6 +167,30 @@ function onDrop() {
         </button>
       </template>
     </div>
+    <div v-if="tagListName !== 'languages'">
+    <label class="form__label" for="language-select">
+              🌐 {{ $t("select-language") }}
+          </label>
+            <select
+              id="language-select"
+              v-model="selectedLanguage"
+              class="form__control"
+            >
+              <option v-for="lang in config.languages" :key="lang.code" :value="lang.code">
+                {{ $t(lang.isoname) }}
+              </option>
+            </select>
+
+            <div class="form__group col-span-full">
+            <button
+              type="button"
+              class="form__btn form__btn--ghost"
+              @click="translate()"
+            >
+              {{ $t("translate-text") }}
+            </button>
+            </div>
+          </div>
     <ul
       ref="parentEl"
       class="tags"
