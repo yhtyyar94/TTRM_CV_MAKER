@@ -17,6 +17,7 @@ function focusEditor(id: string) {
 }
 
 const selectedLanguage = ref('en')
+const isSummaryLoading = ref(false)
 
 const config = {
   layouts: ['one-column', 'two-column', 'one-column-alt', 'two-column-alt'],
@@ -36,6 +37,11 @@ const config = {
 }
 
 async function translate(text: string, lang: string, field: 'title' | 'summary', entryId: string) {
+  if(field==='summary')
+  { 
+    isSummaryLoading.value = true
+  }
+  else
   isLoading.value = true
   try {
 
@@ -49,7 +55,12 @@ async function translate(text: string, lang: string, field: 'title' | 'summary',
   } catch (e) {
     console.error(e)
   }
-  isLoading.value = false
+ 
+  if(field==='summary')
+  { 
+    isSummaryLoading.value = false
+  }
+  else  isLoading.value = false
 }
 </script>
 
@@ -95,7 +106,8 @@ async function translate(text: string, lang: string, field: 'title' | 'summary',
           </template>
           <template #content>
             <div class="dynamic-section">
-              <div class="form__group col-span-full">
+
+              <div v-if="!isLoading" class="form__group col-span-full">
                 <label
                   class="form__label"
                   :for="`entryTitle--${entry.id}`"
@@ -112,8 +124,9 @@ async function translate(text: string, lang: string, field: 'title' | 'summary',
                   type="text"
                 >
               </div>
-
+              <div v-else class="loader"></div>
               <div class="form__group col-span-full">
+              
             <label class="form__label" for="language-select">
               🌐 {{ $t("select-language") }}
             </label>
@@ -194,7 +207,7 @@ async function translate(text: string, lang: string, field: 'title' | 'summary',
                   type="date"
                 >
               </div>
-              <div class="form__group col-span-full">
+              <div v-if="!isSummaryLoading" class="form__group col-span-full">
                 <label
                   class="form__label"
                   :for="`entrySummary-${entry.id}`"
@@ -208,6 +221,9 @@ async function translate(text: string, lang: string, field: 'title' | 'summary',
                   :read-only="false"
                 />
               </div>
+              <div v-else class="loader"></div>
+
+
 
 
               <label class="form__label" for="language-select">
@@ -248,5 +264,18 @@ async function translate(text: string, lang: string, field: 'title' | 'summary',
   &__title {
     @apply flex items-center flex-row-reverse;
   }
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 </style>

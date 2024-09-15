@@ -62,6 +62,13 @@ const { formSettings } = useCvState()
       </ul>
     </section>
     <CvPreviewSkill
+      v-if="formSettings.layout==='two-column-alt'"
+      :skill-name="$t('achievement')"
+      :display="formSettings.displayInterests"
+      :skills="formSettings.interests"
+    />
+    <CvPreviewSkill
+      v-else
       :skill-name="$t('interests')"
       :display="formSettings.displayInterests"
       :skills="formSettings.interests"

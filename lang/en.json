@@ -79,10 +79,11 @@
   "website": "Our Website",
   "create": "Create CV",
   "rights": "2024 WE'EHERE. All rights reserved",
-  "download-cv-word": "Download your CV as Word",
+  "download-cv-word": "Download PDF & Convert to Word",
   "translate-text": "Translated Test",
   "translate-about-me": "Translate About Me",
   "translate-title": "Translate Title",
-  "translate-summary": "Translate Summary"
+  "translate-summary": "Translate Summary",
+  "achievement": "Achievements"
 
 }

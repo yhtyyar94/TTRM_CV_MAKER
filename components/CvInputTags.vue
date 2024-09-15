@@ -142,7 +142,7 @@ function onDrop() {
         :section-name="`${tagListName}`"
       />
     </label>
-    <div class="flex gap-3">
+    <div v-if="!isLoading || tagListName === 'languages'" class="flex gap-3">
       <template v-if="tagListName === 'languages'">
         <CvInputLang />
       </template>
@@ -167,6 +167,7 @@ function onDrop() {
         </button>
       </template>
     </div>
+    <div v-else class="loader"></div>
     <div v-if="tagListName !== 'languages'">
     <label class="form__label" for="language-select">
               🌐 {{ $t("select-language") }}
@@ -240,5 +241,18 @@ function onDrop() {
   position: absolute;
   top: 0.5rem;
   right: 25%;
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 </style>

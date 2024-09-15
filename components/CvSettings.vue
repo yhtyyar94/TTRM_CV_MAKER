@@ -212,7 +212,6 @@ function onVideoLoad(){
           <!-- Existing form fields -->
 
           <!-- About Me Section -->
-          {{  isLoading }}
           <div v-if="!isLoading" class="form__group col-span-full">
             <label class="form__label" for="aboutme">🌟 {{ $t("about-me") }}</label>
             <textarea
@@ -285,7 +284,7 @@ function onVideoLoad(){
                     allowfullscreen
                   
                   ></iframe>
-
+ 
                 </div>
               </div>
               <CvInputTags v-model="formSettings.jobSkills" tag-list-name="jobSkills"
@@ -294,8 +293,11 @@ function onVideoLoad(){
                 :tag-list-label="`🧸 ${$t('soft-skills')}`" :display="Boolean(formSettings.displaySoftSkills)" />
               <CvInputTags v-model="formSettings.languages" tag-list-name="languages"
                 :tag-list-label="`🌎 ${$t('languages')}`" :display="Boolean(formSettings.displayLanguages)" />
-              <CvInputTags v-model="formSettings.interests" tag-list-name="interests"
+              <CvInputTags v-if="formSettings.layout==='two-column-alt'" v-model="formSettings.interests" tag-list-name="interests"
+                :tag-list-label="`🧸 ${$t('achievement')}`" :display="Boolean(formSettings.displayInterests)" />
+                <CvInputTags v-else v-model="formSettings.interests" tag-list-name="interests"
                 :tag-list-label="`🧸 ${$t('interests')}`" :display="Boolean(formSettings.displayInterests)" />
+
             </div>
           </template>
         </expansion-panel>
