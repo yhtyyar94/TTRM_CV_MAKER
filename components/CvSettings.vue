@@ -213,6 +213,13 @@ function onVideoLoad() {
           <template #content>
             <div class="grid grid-cols-2 gap-x-3 gap-y-10">
               <!-- Existing form fields -->
+
+              <div class="form__group col-span-full">
+                <span class="form__label">📷 {{ $t("profile-image") }} </span>
+                <CvProfileImageUploader
+                  v-model="formSettings.profileImageDataUri"
+                />
+              </div>
               <div class="form__group col-span-full">
                 <label
                   class="form__label"
