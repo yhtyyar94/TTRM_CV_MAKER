@@ -4,10 +4,7 @@ import { useCvState } from '~/data/useCvState'
 const CVFY_IMAGE = 'https://werhere.nl/wp-content/uploads/2021/08/logo.png'
 
 const { setUpCvSettings } = useCvState()
-const route = useRoute()
 const { t, locale } = useI18n()
-
-const href = `https://cvfy.xyz${route.path}`
 
 onMounted(() => {
   setUpCvSettings()
@@ -18,17 +15,6 @@ useHead({
     lang: locale,
   },
   title: t('title-tag'),
-  link: [
-    {
-      rel: 'preload',
-      as: 'image',
-      href: 'https://werhere.nl/wp-content/uploads/2021/08/logo.png',
-    },
-    {
-      rel: 'canonical',
-      href,
-    },
-  ],
   meta: [
     {
       hid: 'description',
@@ -68,9 +54,7 @@ useHead({
   <main class="font-app main">
     <CvSettings class="basis-1/4 min-w-80" />
     <CvPreview class="basis-3/4" />
-
   </main>
-
 </template>
 
 <style lang="postcss">

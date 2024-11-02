@@ -1,6 +1,7 @@
-export default function useFormatDate() {
-  const i18n = useI18n()
+import { useLanguage } from '~/composables/useCvLang'
 
+const { language } = useLanguage()
+export default function useFormatDate() {
   return function formatDate(date: Date): string {
     const options: Intl.DateTimeFormatOptions = {
       timeZone: 'UTC',
@@ -8,6 +9,6 @@ export default function useFormatDate() {
       month: 'short',
     }
     const dateObj = new Date(date)
-    return dateObj.toLocaleDateString(i18n.locale.value, options)
+    return dateObj.toLocaleDateString(language.value, options)
   }
 }

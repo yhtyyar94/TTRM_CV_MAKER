@@ -71,18 +71,18 @@ export default defineNuxtConfig({
       {
         code: 'nl',
         file: 'nl.json',
-        name: 'Dutch'
+        name: 'Dutch',
       },
       {
         code: 'tr',
         file: 'tr.json',
-        name: 'Turkish'
+        name: 'Turkish',
       },
       {
         code: 'bn',
         file: 'bn.json',
-        name: 'Bengali'
-      }
+        name: 'Bengali',
+      },
 
     ],
     lazy: false,
@@ -93,7 +93,7 @@ export default defineNuxtConfig({
       cookieKey: 'i18n_redirected',
       redirectOn: 'root',
     },
-    
+
   },
 
   router: {

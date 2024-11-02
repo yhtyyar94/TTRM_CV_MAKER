@@ -19,7 +19,8 @@
   "interests": "Interests",
   "languages": "Languages",
   "current": "Current",
-  "cv-language": "CV language",
+  "cv-language": "Your language",
+  "display-language": "CV Language",
   "cv-settings": "CV settings",
   "layout-theme": "Layout theme",
   "color-theme": "Color theme",
@@ -84,6 +85,8 @@
   "translate-about-me": "Translate About Me",
   "translate-title": "Translate Title",
   "translate-summary": "Translate Summary",
-  "achievement": "Achievements"
+  "achievement": "Achievements",
+  "get-started-en": "Create CV in English",
+  "get-started-nl": "Create CV in Dutch"
 
 }

@@ -16,9 +16,8 @@ const phoneNumberHref = computed(() => {
     class="cv__section"
     :class="formSettings.layout === 'one-column' && 'mt-0'"
   >
-
     <div
-      class="flex items-center gap-4" 
+      class="flex items-center gap-4"
     >
       <div
         v-if="formSettings.email"

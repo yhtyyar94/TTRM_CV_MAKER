@@ -1,5 +1,10 @@
 <script lang="ts" setup>
 import { useCvState } from '~/data/useCvState'
+import { useLanguage } from '~/composables/useCvLang'
+
+import cvLang from '~/data/cv'
+
+const { language } = useLanguage()
 
 const { formSettings } = useCvState()
 </script>
@@ -7,7 +12,7 @@ const { formSettings } = useCvState()
 <template>
   <section class="cv__section">
     <h4 class="cv__section-title">
-      {{ $t("languages") }}
+      {{ cvLang[language].languages }}
     </h4>
     <ul>
       <li

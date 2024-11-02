@@ -1,5 +1,10 @@
 <script lang="ts" setup>
 import { useCvState } from '~/data/useCvState'
+import { useLanguage } from '~/composables/useCvLang'
+
+import cvLang from '~/data/cv'
+
+const { language } = useLanguage()
 
 const { formSettings } = useCvState()
 </script>
@@ -11,24 +16,24 @@ const { formSettings } = useCvState()
       :class="formSettings.layout === 'one-column' ? 'cv__section-title--main' : 'sr-only'"
     >
       <span>
-        {{ $t("skills") }}
+        {{ cvLang[language].skills }}
       </span>
       <span
         v-if="formSettings.displayInterests"
         class="slash"
       >/</span>
       <span v-if="formSettings.displayInterests">
-        {{ $t("interests") }}
+        {{ cvLang[language].interests }}
       </span>
     </h4>
     <CvPreviewSkill
-      :skill-name="$t('technical-skills')"
+      :skill-name="cvLang[language].technical_skills"
       :display="formSettings.displayJobSkills"
       :skills="formSettings.jobSkills"
       :with-tags="true"
     />
     <CvPreviewSkill
-      :skill-name="$t('soft-skills')"
+      :skill-name="cvLang[language].soft_skills"
       :display="formSettings.displaySoftSkills"
       :skills="formSettings.softSkills"
     />
@@ -41,7 +46,7 @@ const { formSettings } = useCvState()
         class="capitalize"
         :class="formSettings.layout === 'one-column' ? 'two-dots inline flex-shrink-0' : 'cv__section-title'"
       >
-        {{ $t("languages") }}
+        {{ cvLang[language].languages }}
       </h3>
 
       <ul :class="formSettings.layout === 'one-column' && 'flex flex-wrap break-words'">
@@ -55,21 +60,21 @@ const { formSettings } = useCvState()
           </span>
           <span class="font-light">
             <template v-if="formSettings.layout === 'one-column'"> (</template>{{
-              $t(lang.level)
+              lang.level
             }}<template v-if="formSettings.layout === 'one-column'">)</template>
           </span>
         </li>
       </ul>
     </section>
     <CvPreviewSkill
-      v-if="formSettings.layout==='two-column-alt'"
-      :skill-name="$t('achievement')"
+      v-if="formSettings.layout === 'two-column-alt'"
+      :skill-name="cvLang[language].achievement"
       :display="formSettings.displayInterests"
       :skills="formSettings.interests"
     />
     <CvPreviewSkill
       v-else
-      :skill-name="$t('interests')"
+      :skill-name="cvLang[language].interests"
       :display="formSettings.displayInterests"
       :skills="formSettings.interests"
     />

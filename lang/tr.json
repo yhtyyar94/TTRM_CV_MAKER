@@ -18,7 +18,8 @@
   "interests": "İlgi Alanları",
   "languages": "Diller",
   "current": "Geçerli",
-  "cv-language": "CV Dili",
+  "cv-language": "Diliniz",
+  "display-language": "CV Dili",
   "cv-settings": "CV Settings",
   "layout-theme": "Layout theme",
   "color-theme": "Color theme",
@@ -83,5 +84,7 @@
   "translate-about-me": "Hakkımda Tercüme Et",
   "translate-title": "Başlığı Tercüme Et",
   "translate-summary": "Özeti Tercüme Et",
-  "achievement": "Başarılar"
+  "achievement": "Başarılar",
+  "get-started-en": "İngilizce CV Oluştur",
+  "get-started-nl": "Hollandaca CV Oluştur"
 }

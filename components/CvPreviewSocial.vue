@@ -1,5 +1,10 @@
 <script lang="ts" setup>
 import { useCvState } from '~/data/useCvState'
+import { useLanguage } from '~/composables/useCvLang'
+
+import cvLang from '~/data/cv'
+
+const { language } = useLanguage()
 
 const { formSettings } = useCvState()
 </script>
@@ -13,7 +18,7 @@ const { formSettings } = useCvState()
       class="cv__section-title"
       :class="formSettings.layout === 'one-column' && 'sr-only'"
     >
-      {{ $t("social") }}
+      {{ cvLang[language].social }}
     </h4>
     <div
       class="flex"

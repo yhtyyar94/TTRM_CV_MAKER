@@ -152,6 +152,7 @@ function onVideoLoad() {
           </nuxt-link>
         </div>
       </fieldset>
+
       <!-- LANGUAGE -->
 
       <!-- LAYOUT -->

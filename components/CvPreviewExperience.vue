@@ -2,6 +2,11 @@
 import useFormatDate from '~/composables/useFormatDate'
 import { orderEvents } from '~/utils/functions'
 import { useCvState } from '~/data/useCvState'
+import { useLanguage } from '~/composables/useCvLang'
+
+import cvLang from '~/data/cv'
+
+const { language } = useLanguage()
 
 const { formSettings } = useCvState()
 
@@ -15,7 +20,7 @@ const workSorted = computed(() => {
 <template>
   <section class="cv__section cv__section--main w-full">
     <h4 class="cv__section-title cv__section-title--main">
-      {{ $t("experience") }}
+      {{ cvLang[language].experience }}
     </h4>
     <ul class="cv__event">
       <li
@@ -29,7 +34,7 @@ const workSorted = computed(() => {
           <span class="justify-self-center">{{ job.location }}</span>
           <span class="justify-self-end">
             {{ formatDate(job.from) }} –
-            <template v-if="job.current">{{ $t("current")
+            <template v-if="job.current">{{ cvLang[language].current
             }}</template>
             <template v-else>
               {{ formatDate(job.to) }}

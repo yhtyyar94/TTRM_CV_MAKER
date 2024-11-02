@@ -1,7 +1,10 @@
 <script lang="ts" setup>
+import { useLanguage } from '~/composables/useCvLang'
 import { useCvState } from '~/data/useCvState'
+import cvLang from '~/data/cv'
 
 const { formSettings } = useCvState()
+const { language } = useLanguage()
 
 const emailHref = computed(() => {
   return `mailto:${formSettings.value.email}`
@@ -20,7 +23,7 @@ const phoneNumberHref = computed(() => {
       class="cv__section-title"
       :class="[{ 'sr-only': formSettings.layout === 'one-column' }]"
     >
-      {{ $t("contact") }}
+      {{ cvLang[language].contact }}
     </h4>
     <div
       class="flex"

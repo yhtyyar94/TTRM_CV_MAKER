@@ -1,7 +1,7 @@
 <script lang="ts" setup>
+import CvPreviewOneColumnAlt from './CvPreviewOneColumnAlt.vue'
+import CvPreviewTwoColumnAlt from './CvPreviewTwoColumnAlt.vue'
 import { useCvState } from '~/data/useCvState'
-import CvPreviewOneColumnAlt from './CvPreviewOneColumnAlt.vue';
-import CvPreviewTwoColumnAlt from './CvPreviewTwoColumnAlt.vue';
 
 const { formSettings, isLoading } = useCvState()
 </script>

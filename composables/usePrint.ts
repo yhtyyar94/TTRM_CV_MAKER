@@ -1,7 +1,8 @@
-import { useCvState } from '~/data/useCvState'
 import { saveAs } from 'file-saver'
 import * as docx from 'docx'
 import { useRouter } from '#vue-router'
+import { useCvState } from '~/data/useCvState'
+
 const router = useRouter()
 export default function usePrint() {
   const { formSettings } = useCvState()
@@ -47,11 +48,9 @@ export default function usePrint() {
   }
 
   function downloadWord(): void {
-    downloadPdf();
-    window.open('https://smallpdf.com/pdf-to-word', '_blank');
+    downloadPdf()
+    window.open('https://smallpdf.com/pdf-to-word', '_blank')
   }
-  
-
 
   return {
     downloadPdf,
