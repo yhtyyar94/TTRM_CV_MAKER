@@ -90,15 +90,15 @@ function navigateToCreate() {
           </ClientOnly>
         </div>
         <LandingHeroImage />
-        <LandingProcessView />
-        <div class="text-xs font-light">
+        <!-- <LandingProcessView /> -->
+        <!-- <div class="text-xs font-light">
           Made with ♥️ by
           <LandingLink class="underline" to="https://github.com/claudiabdm" external>
             <span class="text-red-800">
               claudiabdm , modified by walleeva2018 & Supported By WerHere
             </span>
           </LandingLink>
-        </div>
+        </div> -->
       </section>
     </main>
   </div>

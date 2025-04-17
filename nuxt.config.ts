@@ -78,11 +78,6 @@ export default defineNuxtConfig({
         file: 'tr.json',
         name: 'Turkish',
       },
-      {
-        code: 'bn',
-        file: 'bn.json',
-        name: 'Bengali',
-      },
 
     ],
     lazy: false,

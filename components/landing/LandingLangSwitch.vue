@@ -3,6 +3,7 @@ const { locale, locales, setLocale } = useI18n()
 
 const selected = ref(locale)
 
+
 function handleSelect(e: Event) {
   if (e.target && 'value' in e.target) {
     const value = e.target.value as string
