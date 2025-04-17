@@ -41,7 +41,7 @@
         </ul>
       </div>
       <div style="width: 30%;" class="flex flex-col items-center md:items-start text-center md:text-left w-full md:w-auto">
-          <p style="font-weight: bold; font-size: 22px; margin-bottom: 5px;">{{$t('who_we_are')}}?</p>
+          <p style="font-weight: bold; font-size: 22px; margin-bottom: 5px;">{{$t('who_we_are')}}</p>
           <span>{{$t('who_we_are_desc')}}</span>
       </div>
     </div>
