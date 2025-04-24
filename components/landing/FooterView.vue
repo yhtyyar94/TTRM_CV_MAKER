@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+</script>
 
 <template>
   <footer class="footer text-white py-8 sm:text-center">
@@ -34,10 +36,10 @@
           <li><a href="/" class="text-sm text-gray-400 hover:text-red-600">{{$t('home')}}</a></li>
           <li><a href="https://werhere.nl/" target="_blank" class="text-sm text-gray-400 hover:text-red-600">{{$t('website')}}</a></li>
           <li><a href="/create" class="text-sm text-gray-400 hover:text-red-600">{{$t('create')}}</a></li>
-          <li><a href="/create" class="text-sm text-gray-400 hover:text-red-600">{{$t('what_does_werhere')}}</a></li>
-          <li><a href="/create" class="text-sm text-gray-400 hover:text-red-600">{{$t('who_we_are')}}</a></li>
-          <li><a href="/create" class="text-sm text-gray-400 hover:text-red-600">{{$t('be_member')}}</a></li>
-          <li><a href="/create" class="text-sm text-gray-400 hover:text-red-600">{{$t('contact')}}</a></li>
+          <li><a href="https://werhere.nl/wat-doet-werhere" class="text-sm text-gray-400 hover:text-red-600">{{$t('what_does_werhere')}}</a></li>
+          <li><a href="https://werhere.nl/wie-zijn-wij" class="text-sm text-gray-400 hover:text-red-600">{{$t('who_we_are')}}</a></li>
+          <li><a href="https://werhere.nl/word-lid" class="text-sm text-gray-400 hover:text-red-600">{{$t('be_member')}}</a></li>
+          <li><a href="https://werhere.nl/contact" class="text-sm text-gray-400 hover:text-red-600">{{$t('contact')}}</a></li>
         </ul>
       </div>
       <div style="width: 30%;" class="flex flex-col items-center md:items-start text-center md:text-left w-full md:w-auto">

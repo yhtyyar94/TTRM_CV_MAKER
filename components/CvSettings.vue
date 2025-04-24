@@ -99,7 +99,7 @@ function onVideoLoad() {
 
     <div class="px-6 py-4">
       <h5 class="m-2">
-        How it Works
+        {{ $t("how_it_works") }}
       </h5>
       <div class="px-2 py-4">
         <!-- Loader -->
